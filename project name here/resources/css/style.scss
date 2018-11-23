@@ -1,3 +1,26 @@
 body{
+    font-size: 16px;
+}
+
+.trump-card{
+    height: 30rem;
     background-color: red;
+    &:nth-child(2){
+        background-color: green;
+    }
+    &:nth-child(3){
+        background-color: blue;
+    }
+    .stat-container-grid{
+        display: flex;
+        .stat-container{
+            width: 50%;
+            text-align: center;
+            .stat-div{
+                display: flex;
+                margin-left: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+    }
 }

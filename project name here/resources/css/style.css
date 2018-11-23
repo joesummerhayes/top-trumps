@@ -1,4 +1,36 @@
 body {
+  font-size: 16px;
+}
+
+.trump-card {
+  height: 30rem;
   background-color: red;
+}
+
+.trump-card:nth-child(2) {
+  background-color: green;
+}
+
+.trump-card:nth-child(3) {
+  background-color: blue;
+}
+
+.trump-card .stat-container-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.trump-card .stat-container-grid .stat-container {
+  width: 50%;
+  text-align: center;
+}
+
+.trump-card .stat-container-grid .stat-container .stat-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
 }
 /*# sourceMappingURL=style.css.map */
