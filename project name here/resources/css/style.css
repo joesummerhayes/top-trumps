@@ -16,8 +16,6 @@ body {
 }
 
 .trump-card .stat-container-grid {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -27,10 +25,15 @@ body {
 }
 
 .trump-card .stat-container-grid .stat-container .stat-div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-left: 2rem;
   margin-bottom: 2rem;
 }
-/*# sourceMappingURL=style.css.map */
+
+.trump-card .stat-container-grid .stat-container .new-card {
+  background-color: #9595ff;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
