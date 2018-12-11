@@ -2,122 +2,178 @@ $(document).foundation()
 
 $(document).ready(function () {
 
-    // Player Stats: banter/
-    var players = [
-        statsTorres = [40, 65, 80, 40, 35, 70, 'Fernando Torres', "resources/images/torres.jpg"],
-        statsGerrard = [25, 90, 90, 70, 95, 55, 'Steven Gerrard', "resources/images/gerrrard.jpg"],
-        statsLampard = [55, 87, 90, 75, 90, 50, 'Frank Lampard', "resources/images/lampard.jpg"],
-        statsBullard = [90, 40, 60, 60, 50, 75, 'Jimmy Bullard', "resources/images/jimmy.jpg"],
-        statsToure = [65, 70, 80, 72, 60, 30, 'Yaya Toure', "resources/images/yaya.jpg"],
-        statsLuiz = [80, 40, 50, 80, 40, 25, 'David Luiz', "resources/images/luiz.jpg"],
-        statsHenry = [65, 70, 95, 82, 80, 85, 'Thiery Henry', "resources/images/henry.jpg"],
-        statsOwen = [20, 45, 85, 65, 50, 75, 'Michael Owen', "resources/images/owen.jpg"],
-        statsMilner = [85, 78, 75, 78, 87, 20, 'James Milner', "resources/images/milner.jpg"]
-    ];
+        
+    const playersObject = {
+        torres: {
+            name: 'torres',
+            image: 'resources/images/torres.jpg',
+            comedicPresence: 40,
+            leadership: 65,
+            bigGameImpact: 80,
+            weakFootAbility: 40,
+            clubLoyalty: 35,
+            sexAppeal: 70,
+            cool: true
+        },
+        luiz: {
+            name: 'Luiz',
+            image: 'resources/images/luiz.jpg',
+            comedicPresence: 80,
+            leadership: 40,
+            bigGameImpact: 50,
+            weakFootAbility: 80,
+            clubLoyalty: 40,
+            sexAppeal: 25
+        },
+        henry: {
+            name: 'Henry',
+            image: 'resources/images/henry.jpg',
+            comedicPresence: 65,
+            leadership: 70,
+            bigGameImpact: 95,
+            weakFootAbility: 82,
+            clubLoyalty: 80,
+            sexAppeal: 85
+        },
+        gerrard: {
+            name: 'Gerrard',
+            image: 'resources/images/gerrrard.jpg',
+            comedicPresence: 25,
+            leadership: 90,
+            bigGameImpact: 90,
+            weakFootAbility: 70,
+            clubLoyalty: 95,
+            sexAppeal: 55
+        },
+        lampard: {
+            name: 'Lampard',
+            image: 'resources/images/lampard.jpg',
+            comedicPresence: 55,
+            leadership: 87,
+            bigGameImpact: 90,
+            weakFootAbility: 75,
+            clubLoyalty: 90,
+            sexAppeal: 50
+        },   
+        bullard: {
+            name: 'Bullard',
+            image: 'resources/images/jimmy.jpg',
+            comedicPresence: 90,
+            leadership: 40,
+            bigGameImpact: 60,
+            weakFootAbility: 60,
+            clubLoyalty: 50,
+            sexAppeal: 60
+        },   
+        toure: {
+            name: 'Toure',
+            image: 'resources/images/yaya.jpg',
+            comedicPresence: 65,
+            leadership: 70,
+            bigGameImpact: 80,
+            weakFootAbility: 72,
+            clubLoyalty: 60,
+            sexAppeal: 30
+        },  
+        owen: {
+            name: 'Owen',
+            image: 'resources/images/owen.jpg',
+            comedicPresence: 20,
+            leadership: 45,
+            bigGameImpact: 85,
+            weakFootAbility: 65,
+            clubLoyalty: 50,
+            sexAppeal: 75
+        },  
+        milner: {
+            name: 'Milner',
+            image: 'resources/images/milner.jpg',
+            comedicPresence: 85,
+            leadership: 78,
+            bigGameImpact: 75,
+            weakFootAbility: 78,
+            clubLoyalty: 87,
+            sexAppeal: 20
+        },
+        salah: {
+            name: 'Salah',
+            image: 'resources/images/salah.jpg',
+            comedicPresence: 70,
+            leadership: 65,
+            bigGameImpact: 87,
+            weakFootAbility: 40,
+            clubLoyalty: 80,
+            sexAppeal: 67
+        },  
+
+
+    };
+
+
+    // define shuffle function
+    const shuffle = a => {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    // get all the unique players
+    const playerKeys = Object.keys(playersObject); //['torres', 'luiz', 'henry', 'gerrard' etc]
+
+    //shuffle array
+    const shuffledArray = shuffle(playerKeys); // [-, -, -, -]
+
+    // split into 2 equal arrays
+    const shuffledArrayLength = shuffledArray.length; // 4
+    const midpoint = shuffledArrayLength / 2; // 2
+
+    const leftDeck = shuffledArray.splice(0, midpoint); // [2, 3]
+
+    const rightDeck = shuffledArray; // [0, 1]
+
+
+    // shuffledArray.splice((shuffledArray.length)/2, )
+
+    // const playersObjectLength = playersObject.length;
+
+    console.log(leftDeck, rightDeck);
+
+// So now we have our two decks, we want to display the top card of each deck only.
+
+const topCardRight =  playersObject[rightDeck[0]];
+const topCardLeft = playersObject[leftDeck[0]];
 
 
 // function that picks a new card
+const newNewCardRight = () => {
 
-var newCardRight = function() {
-    var no = Math.floor(Math.random() * 10);
+    document.querySelector('.trump-card-right .cp-stat').textContent = topCardRight.comedicPresence;
+    document.querySelector('.trump-card-right .l-stat').textContent = topCardRight.leadership;
+    document.querySelector('.trump-card-right .bgi-stat').textContent = topCardRight.bigGameImpact;
+    document.querySelector('.trump-card-right .wfa-stat').textContent = topCardRight.weakFootAbility;
+    document.querySelector('.trump-card-right .cl-stat').textContent = topCardRight.clubLoyalty;
+    document.querySelector('.trump-card-right .sa-stat').textContent = topCardRight.sexAppeal;
+    document.querySelector('.trump-card-right .player-name').textContent = topCardRight.name;
+    document.getElementById("trump-image-right").src = topCardRight.image;
+};
 
-    if (no === 1) {
-        player = statsTorres
-    } else if (no === 2) {
-        player = statsGerrard
-    } else if (no === 3) {
-        player = statsLampard
-    } else if (no === 4) {
-        player = statsBullard
-    } else if (no === 5) {
-        player = statsToure
-    } else if (no === 6) {
-        player = statsLuiz
-    } else if (no === 7) {
-        player = statsHenry
-    } else if (no === 8) {
-        player = statsOwen
-    } else {
-        player = statsMilner
-    };
-
-    console.log(player);
-
-    //display a player's stats on the card
-
-    document.querySelector('.trump-card-right .cp-stat').textContent = player[0];
-    document.querySelector('.trump-card-right .l-stat').textContent = player[1];
-    document.querySelector('.trump-card-right .bgi-stat').textContent = player[2];
-    document.querySelector('.trump-card-right .wfa-stat').textContent = player[3];
-    document.querySelector('.trump-card-right .cl-stat').textContent = player[4];
-    document.querySelector('.trump-card-right .sa-stat').textContent = player[5];
-    document.querySelector('.trump-card-right .player-name').textContent = player[6];
-
-    ilonaKepRight();
-
-}
-var newCardLeft = function() {
-    var no = Math.floor(Math.random() * 10);
-
-    if (no === 1) {
-        player = statsTorres
-    } else if (no === 2) {
-        player = statsGerrard
-    } else if (no === 3) {
-        player = statsLampard
-    } else if (no === 4) {
-        player = statsBullard
-    } else if (no === 5) {
-        player = statsToure
-    } else if (no === 6) {
-        player = statsLuiz
-    } else if (no === 7) {
-        player = statsHenry
-    } else if (no === 8) {
-        player = statsOwen
-    } else {
-        player = statsMilner
-    };
-
-    console.log(player);
-
-    //display a player's stats on the card
-
-    document.querySelector('.trump-card-left .cp-stat').textContent = player[0];
-    document.querySelector('.trump-card-left .l-stat').textContent = player[1];
-    document.querySelector('.trump-card-left .bgi-stat').textContent = player[2];
-    document.querySelector('.trump-card-left .wfa-stat').textContent = player[3];
-    document.querySelector('.trump-card-left .cl-stat').textContent = player[4];
-    document.querySelector('.trump-card-left .sa-stat').textContent = player[5];
-    document.querySelector('.trump-card-left .player-name').textContent = player[6];
-
-    ilonaKepLeft();
-
-}
-
-document.querySelector('.new-card').addEventListener('click', newCardLeft);
-document.querySelector('.new-card').addEventListener('click', newCardRight);
-
-function ilonaKepRight() {
-    // var frame = document.querySelector('.frame');
-    // var ilona = document.createElement("IMG");
-    // ilona.src = player[7];
-    // frame.appendChild(ilona);
-    document.getElementById("trump-image-right").src = player[7];
-  }
-
-  
+const newNewCardLeft = () => {
+    document.querySelector('.trump-card-left .cp-stat').textContent = topCardLeft.comedicPresence;
+    document.querySelector('.trump-card-left .l-stat').textContent = topCardLeft.leadership;
+    document.querySelector('.trump-card-left .bgi-stat').textContent = topCardLeft.bigGameImpact;
+    document.querySelector('.trump-card-left .wfa-stat').textContent = topCardLeft.weakFootAbility;
+    document.querySelector('.trump-card-left .cl-stat').textContent = topCardLeft.clubLoyalty;
+    document.querySelector('.trump-card-left .sa-stat').textContent = topCardLeft.sexAppeal;
+    document.querySelector('.trump-card-left .player-name').textContent = topCardLeft.name;
+    document.getElementById("trump-image-left").src = topCardLeft.image;
+};
 
 
 
-function ilonaKepLeft() {
-    // var frame = document.querySelector('.frame');
-    // var ilona = document.createElement("IMG");
-    // ilona.src = player[7];
-    // frame.appendChild(ilona);
-    document.getElementById("trump-image-left").src = player[7];
-  }
-
+document.querySelector('.new-card').addEventListener('click', newNewCardLeft);
+document.querySelector('.new-card').addEventListener('click', newNewCardRight);
   
 
 });
