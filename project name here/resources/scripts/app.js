@@ -5,6 +5,7 @@ $(document).ready(function () {
         
     const playersObject = {
         torres: {
+            displayName: 'Torres',
             name: 'torres',
             image: 'resources/images/torres.jpg',
             comedicPresence: 40,
@@ -16,7 +17,8 @@ $(document).ready(function () {
             cool: true
         },
         luiz: {
-            name: 'Luiz',
+            displayName: 'Luiz',
+            name: 'luiz',
             image: 'resources/images/luiz.jpg',
             comedicPresence: 80,
             leadership: 40,
@@ -26,7 +28,8 @@ $(document).ready(function () {
             sexAppeal: 25
         },
         henry: {
-            name: 'Henry',
+            displayName: 'Henry',
+            name: 'henry',
             image: 'resources/images/henry.jpg',
             comedicPresence: 65,
             leadership: 70,
@@ -36,7 +39,8 @@ $(document).ready(function () {
             sexAppeal: 85
         },
         gerrard: {
-            name: 'Gerrard',
+            displayName: 'Gerrard',
+            name: 'gerrard',
             image: 'resources/images/gerrrard.jpg',
             comedicPresence: 25,
             leadership: 90,
@@ -46,7 +50,8 @@ $(document).ready(function () {
             sexAppeal: 55
         },
         lampard: {
-            name: 'Lampard',
+            displayName: 'Lampard',
+            name: 'lampard',
             image: 'resources/images/lampard.jpg',
             comedicPresence: 55,
             leadership: 87,
@@ -56,7 +61,8 @@ $(document).ready(function () {
             sexAppeal: 50
         },   
         bullard: {
-            name: 'Bullard',
+            displayName: 'Bullard',
+            name: 'bullard',
             image: 'resources/images/jimmy.jpg',
             comedicPresence: 90,
             leadership: 40,
@@ -66,7 +72,8 @@ $(document).ready(function () {
             sexAppeal: 60
         },   
         toure: {
-            name: 'Toure',
+            name: 'toure',
+            displayName: 'Toure',
             image: 'resources/images/yaya.jpg',
             comedicPresence: 65,
             leadership: 70,
@@ -76,7 +83,8 @@ $(document).ready(function () {
             sexAppeal: 30
         },  
         owen: {
-            name: 'Owen',
+            name: 'owen',
+            displayName: 'Owen',
             image: 'resources/images/owen.jpg',
             comedicPresence: 20,
             leadership: 45,
@@ -86,7 +94,8 @@ $(document).ready(function () {
             sexAppeal: 75
         },  
         milner: {
-            name: 'Milner',
+            name: 'milner',
+            displayName: 'Milner',
             image: 'resources/images/milner.jpg',
             comedicPresence: 85,
             leadership: 78,
@@ -96,7 +105,8 @@ $(document).ready(function () {
             sexAppeal: 20
         },
         salah: {
-            name: 'Salah',
+            displayName: 'Salah',
+            name: 'salah',
             image: 'resources/images/salah.jpg',
             comedicPresence: 70,
             leadership: 65,
@@ -146,8 +156,9 @@ const topCardRight =  playersObject[rightDeck[0]];
 const topCardLeft = playersObject[leftDeck[0]];
 
 
+
 // function that picks a new card
-const newNewCardRight = () => {
+const newCardRight = () => {
 
     document.querySelector('.trump-card-right .cp-stat').textContent = topCardRight.comedicPresence;
     document.querySelector('.trump-card-right .l-stat').textContent = topCardRight.leadership;
@@ -155,26 +166,101 @@ const newNewCardRight = () => {
     document.querySelector('.trump-card-right .wfa-stat').textContent = topCardRight.weakFootAbility;
     document.querySelector('.trump-card-right .cl-stat').textContent = topCardRight.clubLoyalty;
     document.querySelector('.trump-card-right .sa-stat').textContent = topCardRight.sexAppeal;
-    document.querySelector('.trump-card-right .player-name').textContent = topCardRight.name;
+    document.querySelector('.trump-card-right .player-name').textContent = topCardRight.displayName;
     document.getElementById("trump-image-right").src = topCardRight.image;
+
+
 };
 
-const newNewCardLeft = () => {
+const newCardLeft = () => {
     document.querySelector('.trump-card-left .cp-stat').textContent = topCardLeft.comedicPresence;
     document.querySelector('.trump-card-left .l-stat').textContent = topCardLeft.leadership;
     document.querySelector('.trump-card-left .bgi-stat').textContent = topCardLeft.bigGameImpact;
     document.querySelector('.trump-card-left .wfa-stat').textContent = topCardLeft.weakFootAbility;
     document.querySelector('.trump-card-left .cl-stat').textContent = topCardLeft.clubLoyalty;
     document.querySelector('.trump-card-left .sa-stat').textContent = topCardLeft.sexAppeal;
-    document.querySelector('.trump-card-left .player-name').textContent = topCardLeft.name;
+    document.querySelector('.trump-card-left .player-name').textContent = topCardLeft.displayName;
     document.getElementById("trump-image-left").src = topCardLeft.image;
+    $('.comedic-presence').attr('data-name', topCardLeft.name);
+    $('.comedic-presence').attr('data-value', topCardLeft.comedicPresence);
+    $('.comedic-presence').attr('data-stat', 'comedicPresence');
+    $('.leadership').attr('data-name', topCardLeft.name);
+    $('.leadership').attr('data-value', topCardLeft.leadership);
+    $('.leadership').attr('data-stat', 'leadership');
+    $('.big-game-impact').attr('data-name', topCardLeft.name);
+    $('.big-game-impact').attr('data-value', topCardLeft.bigGameImpact);
+    $('.big-game-impact').attr('data-stat', 'bigGameImpact');
+};
+
+document.querySelector('.new-card').addEventListener('click', newCardLeft);
+document.querySelector('.new-card').addEventListener('click', newCardRight);
+
+
+// START GAME BUTTON
+
+// 1. COIN FLIPS, DECIDES OUR ACTIVE PLAYER
+
+const coinFlip = () => {
+   return Math.floor(Math.random() * 2);
 };
 
 
+document.querySelector('.new-game').addEventListener('click', startGame); 
 
-document.querySelector('.new-card').addEventListener('click', newNewCardLeft);
-document.querySelector('.new-card').addEventListener('click', newNewCardRight);
-  
+function startGame() {
+    let activePlayer;
+    x = coinFlip();
+    if (x === 0) {
+        activePlayer = leftDeck;
+        inactivePlayer = rightDeck;
+    } else {
+        activePlayer = rightDeck;
+        inactivePlayer = leftDeck;
+    };
+    console.log(activePlayer);
+};
+
+
+//  2. ACTIVE PLAYER CAN SELECT ANY OF HIS PLAYERS STATS 
+// once a stat is clicked, a function runs that compares active player against inactive player and decides which one is higher (console.log the outcome)
+
+
+// when i click one of the stats, i want to read the number associated with that stat
+const el = document.querySelector(".comedic-presence");
+
+const handleStatClick = function(param1, name, stat) {
+    console.log(param1.target.dataset);
+    const statName = el.dataset.stat; //comedicPresence
+    }
+
+document.querySelector('.stat-div').addEventListener('click', handleStatClick)
+
+// think i need to loop through the different stat divs and apply the above code, so all the data sets are stored. 
+
+$('.stat-div').each(function(i, obj) {
+ 
+})
+
+
+
+
+const statContainerRight = document.querySelector('.trump-card-right .cp-stat');
+const statContainerLeft = document.querySelector('.trump-card-left .cp-stat');
+
+//just need to find a way to make the ('.cp-stat') interchangeable....the rest of the below code would run
+
+
+statContainerLeft.onclick = function(){
+    const statLeft =statContainerLeft.textContent;
+    const statRight =statContainerRight.textContent;
+    console.log(statLeft, statRight)
+    if (statLeft > statRight) {
+        alert(leftDeck[0] + ' wins!')
+    } else if (rightDeck > leftDeck) {
+        alert (rightDeck[0] + ' wins!')
+    } else (alert('Ooooo draw'))
+};
+
 
 });
 
