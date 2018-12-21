@@ -139,9 +139,9 @@ $(document).ready(function () {
     const shuffledArrayLength = shuffledArray.length; // 4
     const midpoint = shuffledArrayLength / 2; // 2
 
-    const leftDeck = shuffledArray.splice(0, midpoint); // [2, 3]
+    let leftDeck = shuffledArray.splice(0, midpoint); // [2, 3]
 
-    const rightDeck = shuffledArray; // [0, 1]
+    let rightDeck = shuffledArray; // [0, 1]
 
 
     // shuffledArray.splice((shuffledArray.length)/2, )
@@ -152,13 +152,15 @@ $(document).ready(function () {
 
 // So now we have our two decks, we want to display the top card of each deck only.
 
-const topCardRight =  playersObject[rightDeck[0]];
-const topCardLeft = playersObject[leftDeck[0]];
+
 
 
 
 // function that picks a new card
 const newCardRight = () => {
+    let topCardRight =  playersObject[rightDeck[0]];
+
+ 
 
     document.querySelector('.trump-card-right .cp-stat').textContent = topCardRight.comedicPresence;
     document.querySelector('.trump-card-right .l-stat').textContent = topCardRight.leadership;
@@ -169,10 +171,11 @@ const newCardRight = () => {
     document.querySelector('.trump-card-right .player-name').textContent = topCardRight.displayName;
     document.getElementById("trump-image-right").src = topCardRight.image;
 
-
 };
 
 const newCardLeft = () => {
+
+let topCardLeft = playersObject[leftDeck[0]];
     document.querySelector('.trump-card-left .cp-stat').textContent = topCardLeft.comedicPresence;
     document.querySelector('.trump-card-left .l-stat').textContent = topCardLeft.leadership;
     document.querySelector('.trump-card-left .bgi-stat').textContent = topCardLeft.bigGameImpact;
@@ -244,22 +247,54 @@ $('.stat-div').each(function(i, obj) {
 
 
 
-const statContainerRight = document.querySelector('.trump-card-right .cp-stat');
-const statContainerLeft = document.querySelector('.trump-card-left .cp-stat');
+
+
 
 //just need to find a way to make the ('.cp-stat') interchangeable....the rest of the below code would run
 
+$('.stat-div').click(function(){
+    var statClass = $(this).find('h6').attr('class');
+console.log(statClass);
 
-statContainerLeft.onclick = function(){
+const statContainerRight = document.querySelector('.trump-card-right .' + statClass);
+const statContainerLeft = document.querySelector('.trump-card-left .' + statClass);
+
+
     const statLeft =statContainerLeft.textContent;
     const statRight =statContainerRight.textContent;
-    console.log(statLeft, statRight)
+    console.log(statLeft, statRight);
+
     if (statLeft > statRight) {
-        alert(leftDeck[0] + ' wins!')
-    } else if (rightDeck > leftDeck) {
-        alert (rightDeck[0] + ' wins!')
-    } else (alert('Ooooo draw'))
-};
+        alert(leftDeck[0] + ' wins!');
+        // remove the losing card (top card) from the right deck and add it to the left deck 
+        leftDeck.splice(leftDeck.length, 0, rightDeck[0]);
+        rightDeck = rightDeck.slice(1);
+        console.log(leftDeck, rightDeck);
+
+    } else if (statRight > statLeft) {
+        alert (rightDeck[0] + ' wins!');
+        rightDeck.splice(rightDeck.length, 0, leftDeck[0]);
+        leftDeck = leftDeck.slice(1);
+        console.log(leftDeck, rightDeck);
+
+    } else (alert('Ooooo draw'));
+
+console.log(rightDeck[0], leftDeck[0]);
+
+newCardRight();
+newCardLeft();
+
+    // display next card on array
+
+
+});
+
+
+
+
+
+
+
 
 
 });
