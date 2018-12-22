@@ -114,7 +114,32 @@ $(document).ready(function () {
             weakFootAbility: 40,
             clubLoyalty: 80,
             sexAppeal: 67
-        },  
+        },
+        beckham: {
+            displayName: 'Beckham',
+            name: 'beckham',
+            image: 'resources/images/beckham.jpg',
+            comedicPresence: 18,
+            leadership: 75,
+            bigGameImpact: 92,
+            weakFootAbility: 37,
+            clubLoyalty: 40,
+            sexAppeal: 90
+
+        },
+        neymar: {
+            displayName: 'Neymar',
+            name: 'neymar',
+            image: 'resources/images/neymar.jpg',
+            comedicPresence: 30,
+            leadership: 18,
+            bigGameImpact: 77,
+            weakFootAbility: 70,
+            clubLoyalty: 18,
+            sexAppeal: 82
+
+        },
+
 
 
     };
@@ -220,29 +245,16 @@ function startGame() {
         activePlayer = rightDeck;
         inactivePlayer = leftDeck;
     };
-    console.log(activePlayer);
+    console.log('1111111',activePlayer);
 };
+
 
 
 //  2. ACTIVE PLAYER CAN SELECT ANY OF HIS PLAYERS STATS 
 // once a stat is clicked, a function runs that compares active player against inactive player and decides which one is higher (console.log the outcome)
 
 
-// when i click one of the stats, i want to read the number associated with that stat
-const el = document.querySelector(".comedic-presence");
 
-const handleStatClick = function(param1, name, stat) {
-    console.log(param1.target.dataset);
-    const statName = el.dataset.stat; //comedicPresence
-    }
-
-document.querySelector('.stat-div').addEventListener('click', handleStatClick)
-
-// think i need to loop through the different stat divs and apply the above code, so all the data sets are stored. 
-
-$('.stat-div').each(function(i, obj) {
- 
-})
 
 
 
@@ -269,12 +281,14 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
         // remove the losing card (top card) from the right deck and add it to the left deck 
         leftDeck.splice(leftDeck.length, 0, rightDeck[0]);
         rightDeck = rightDeck.slice(1);
+        leftDeck.push(leftDeck.shift());
         console.log(leftDeck, rightDeck);
 
     } else if (statRight > statLeft) {
         alert (rightDeck[0] + ' wins!');
         rightDeck.splice(rightDeck.length, 0, leftDeck[0]);
         leftDeck = leftDeck.slice(1);
+        rightDeck.push(rightDeck.shift());
         console.log(leftDeck, rightDeck);
 
     } else (alert('Ooooo draw'));
@@ -284,7 +298,6 @@ console.log(rightDeck[0], leftDeck[0]);
 newCardRight();
 newCardLeft();
 
-    // display next card on array
 
 
 });
