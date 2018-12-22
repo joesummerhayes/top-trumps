@@ -177,16 +177,8 @@ $(document).ready(function () {
 
 // So now we have our two decks, we want to display the top card of each deck only.
 
-
-
-
-
-// function that picks a new card
 const newCardRight = () => {
     let topCardRight =  playersObject[rightDeck[0]];
-
- 
-
     document.querySelector('.trump-card-right .cp-stat').textContent = topCardRight.comedicPresence;
     document.querySelector('.trump-card-right .l-stat').textContent = topCardRight.leadership;
     document.querySelector('.trump-card-right .bgi-stat').textContent = topCardRight.bigGameImpact;
@@ -195,11 +187,9 @@ const newCardRight = () => {
     document.querySelector('.trump-card-right .sa-stat').textContent = topCardRight.sexAppeal;
     document.querySelector('.trump-card-right .player-name').textContent = topCardRight.displayName;
     document.getElementById("trump-image-right").src = topCardRight.image;
-
 };
 
 const newCardLeft = () => {
-
 let topCardLeft = playersObject[leftDeck[0]];
     document.querySelector('.trump-card-left .cp-stat').textContent = topCardLeft.comedicPresence;
     document.querySelector('.trump-card-left .l-stat').textContent = topCardLeft.leadership;
@@ -209,20 +199,25 @@ let topCardLeft = playersObject[leftDeck[0]];
     document.querySelector('.trump-card-left .sa-stat').textContent = topCardLeft.sexAppeal;
     document.querySelector('.trump-card-left .player-name').textContent = topCardLeft.displayName;
     document.getElementById("trump-image-left").src = topCardLeft.image;
-    $('.comedic-presence').attr('data-name', topCardLeft.name);
-    $('.comedic-presence').attr('data-value', topCardLeft.comedicPresence);
-    $('.comedic-presence').attr('data-stat', 'comedicPresence');
-    $('.leadership').attr('data-name', topCardLeft.name);
-    $('.leadership').attr('data-value', topCardLeft.leadership);
-    $('.leadership').attr('data-stat', 'leadership');
-    $('.big-game-impact').attr('data-name', topCardLeft.name);
-    $('.big-game-impact').attr('data-value', topCardLeft.bigGameImpact);
-    $('.big-game-impact').attr('data-stat', 'bigGameImpact');
 };
 
-document.querySelector('.new-card').addEventListener('click', newCardLeft);
-document.querySelector('.new-card').addEventListener('click', newCardRight);
 
+
+
+
+// new game function 
+
+const newGame = () => {
+
+newCardLeft();
+newCardRight();
+selectActivePlayer();
+
+};
+
+
+
+document.querySelector('.new-card').addEventListener('click', newGame);
 
 // START GAME BUTTON
 
@@ -232,10 +227,7 @@ const coinFlip = () => {
    return Math.floor(Math.random() * 2);
 };
 
-
-document.querySelector('.new-game').addEventListener('click', startGame); 
-
-function startGame() {
+function selectActivePlayer() {
     let activePlayer;
     x = coinFlip();
     if (x === 0) {
@@ -245,7 +237,7 @@ function startGame() {
         activePlayer = rightDeck;
         inactivePlayer = leftDeck;
     };
-    console.log('1111111',activePlayer);
+    console.log(activePlayer);
 };
 
 
