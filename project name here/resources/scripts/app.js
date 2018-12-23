@@ -2,6 +2,20 @@ $(document).foundation()
 
 $(document).ready(function () {
 
+    const coinFlip = () => {
+        const flipResult = Math.random();
+        $('#coin').removeClass();
+        setTimeout(function(){
+          if(flipResult <= 0.5){
+            $('#coin').addClass('heads');
+            console.log('left player active');
+          }
+          else{
+            $('#coin').addClass('tails');
+            console.log('right player active');
+          }
+        }, 100);
+    };
 
 
         
@@ -213,7 +227,8 @@ const newGame = () => {
 
 newCardLeft();
 newCardRight();
-// selectActivePlayer();
+coinFlip();
+
 
 };
 
@@ -225,43 +240,7 @@ document.querySelector('.new-card').addEventListener('click', newGame);
 
 // 1. COIN FLIPS, DECIDES OUR ACTIVE PLAYER
 
-const coinFlip = () => {
-   return Math.floor(Math.random() * 2);
-};
 
-$('.new-card').on('click', function(){
-    var flipResult = Math.random();
-    let activePlayer;
-    $('#coin').removeClass();
-    setTimeout(function(){
-      if(flipResult <= 0.5){
-        $('#coin').addClass('heads');
-        activePlayer = leftDeck;
-        inactivePlayer = rightDeck;
-        console.log(activePlayer);
-      }
-      else{
-        $('#coin').addClass('tails');
-        activePlayer = rightDeck;
-        inactivePlayer = leftDeck;
-        console.log(activePlayer);
-      }
-    }, 100);
-    
-  });
-
-// function selectActivePlayer() {
-//     let activePlayer;
-//     x = coinFlip();
-//     if (x === 0) {
-//         activePlayer = leftDeck;
-//         inactivePlayer = rightDeck;
-//     } else {
-//         activePlayer = rightDeck;
-//         inactivePlayer = leftDeck;
-//     };
-//     console.log(activePlayer);
-// };
 
 
 
