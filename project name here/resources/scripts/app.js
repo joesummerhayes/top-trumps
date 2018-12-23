@@ -2,20 +2,7 @@ $(document).foundation()
 
 $(document).ready(function () {
 
-    $('.new-card').on('click', function(){
-        var flipResult = Math.random();
-        $('#coin').removeClass();
-        setTimeout(function(){
-          if(flipResult <= 0.5){
-            $('#coin').addClass('heads');
-            console.log('it is head');
-          }
-          else{
-            $('#coin').addClass('tails');
-            console.log('it is tails');
-          }
-        }, 100);
-      });
+
 
         
     const playersObject = {
@@ -226,7 +213,7 @@ const newGame = () => {
 
 newCardLeft();
 newCardRight();
-selectActivePlayer();
+// selectActivePlayer();
 
 };
 
@@ -242,18 +229,39 @@ const coinFlip = () => {
    return Math.floor(Math.random() * 2);
 };
 
-function selectActivePlayer() {
+$('.new-card').on('click', function(){
+    var flipResult = Math.random();
     let activePlayer;
-    x = coinFlip();
-    if (x === 0) {
+    $('#coin').removeClass();
+    setTimeout(function(){
+      if(flipResult <= 0.5){
+        $('#coin').addClass('heads');
         activePlayer = leftDeck;
         inactivePlayer = rightDeck;
-    } else {
+        console.log(activePlayer);
+      }
+      else{
+        $('#coin').addClass('tails');
         activePlayer = rightDeck;
         inactivePlayer = leftDeck;
-    };
-    console.log(activePlayer);
-};
+        console.log(activePlayer);
+      }
+    }, 100);
+    
+  });
+
+// function selectActivePlayer() {
+//     let activePlayer;
+//     x = coinFlip();
+//     if (x === 0) {
+//         activePlayer = leftDeck;
+//         inactivePlayer = rightDeck;
+//     } else {
+//         activePlayer = rightDeck;
+//         inactivePlayer = leftDeck;
+//     };
+//     console.log(activePlayer);
+// };
 
 
 
