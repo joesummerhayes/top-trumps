@@ -2,22 +2,6 @@ $(document).foundation()
 
 $(document).ready(function () {
 
-    const coinFlip = () => {
-        const flipResult = Math.random();
-        $('#coin').removeClass();
-        setTimeout(function(){
-          if(flipResult <= 0.5){
-            $('#coin').addClass('heads');
-            console.log('left player active');
-          }
-          else{
-            $('#coin').addClass('tails');
-            console.log('right player active');
-          }
-        }, 100);
-    };
-
-
         
     const playersObject = {
         torres: {
@@ -185,10 +169,6 @@ $(document).ready(function () {
     let rightDeck = shuffledArray; // [0, 1]
 
 
-    // shuffledArray.splice((shuffledArray.length)/2, )
-
-    // const playersObjectLength = playersObject.length;
-
     console.log(leftDeck, rightDeck);
 
 // So now we have our two decks, we want to display the top card of each deck only.
@@ -218,7 +198,20 @@ let topCardLeft = playersObject[leftDeck[0]];
 };
 
 
-
+const coinFlip = () => {
+    const flipResult = Math.random();
+    $('#coin').removeClass();
+    setTimeout(function(){
+      if(flipResult <= 0.5){
+        $('#coin').addClass('heads');
+        console.log('left player active');
+      }
+      else{
+        $('#coin').addClass('tails');
+        console.log('right player active');
+      }
+    }, 100);
+};
 
 
 // new game function 
@@ -235,23 +228,6 @@ coinFlip();
 
 
 document.querySelector('.new-card').addEventListener('click', newGame);
-
-// START GAME BUTTON
-
-// 1. COIN FLIPS, DECIDES OUR ACTIVE PLAYER
-
-
-
-
-
-//  2. ACTIVE PLAYER CAN SELECT ANY OF HIS PLAYERS STATS 
-// once a stat is clicked, a function runs that compares active player against inactive player and decides which one is higher (console.log the outcome)
-
-
-
-
-
-
 
 
 
@@ -295,9 +271,6 @@ newCardLeft();
 
 
 });
-
-
-
 
 
 
