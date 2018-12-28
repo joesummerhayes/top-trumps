@@ -4,17 +4,29 @@ $(document).ready(function () {
 
     const coinFlip = () => {
         const flipResult = Math.random();
+        let activePlayer;
         $('#coin').removeClass();
+        $('.trump-card-left').removeClass('active-player','inactive-player');
+        $('.trump-card-right').removeClass('active-player','inactive-player');
         setTimeout(function(){
           if(flipResult <= 0.5){
             $('#coin').addClass('heads');
-            console.log('left player active');
+            activePlayer = leftDeck;
+            console.log('left player active', activePlayer);
+            $('.trump-card-left').addClass('active-player');
+            $('.trump-card-right').addClass('inactive-player');
           }
           else{
             $('#coin').addClass('tails');
-            console.log('right player active');
+            activePlayer = rightDeck;
+            console.log('right player active', activePlayer);
+            $('.trump-card-right').addClass('active-player');
+            $('.trump-card-left').addClass('inactive-player');
           }
         }, 100);
+
+
+
     };
 
 
@@ -259,6 +271,8 @@ document.querySelector('.new-card').addEventListener('click', newGame);
 //just need to find a way to make the ('.cp-stat') interchangeable....the rest of the below code would run
 
 $('.stat-div').click(function(){
+    $('.trump-card-left').removeClass('active-player','inactive-player');
+    $('.trump-card-right').removeClass('active-player','inactive-player');
     var statClass = $(this).find('h6').attr('class');
 console.log(statClass);
 
@@ -277,6 +291,9 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
         rightDeck = rightDeck.slice(1);
         leftDeck.push(leftDeck.shift());
         console.log(leftDeck, rightDeck);
+        activePlayer = leftDeck;
+        $('.trump-card-left').addClass('active-player');
+            $('.trump-card-right').addClass('inactive-player');
 
     } else if (statRight > statLeft) {
         alert (rightDeck[0] + ' wins!');
@@ -284,6 +301,9 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
         leftDeck = leftDeck.slice(1);
         rightDeck.push(rightDeck.shift());
         console.log(leftDeck, rightDeck);
+        activePlayer = rightDeck;
+        $('.trump-card-right').addClass('active-player');
+            $('.trump-card-left').addClass('inactive-player');
 
     } else (alert('Ooooo draw'));
 

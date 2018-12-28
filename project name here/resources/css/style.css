@@ -163,4 +163,16 @@ body {
     transform: rotateY(1980deg);
   }
 }
+
+.inactive-player .stat-container-grid .stat-container .stat-div h6 {
+  display: none;
+}
+
+.active-player .stat-container-grid .stat-container .stat-div h6 {
+  display: block !important;
+}
+
+.trump-card .stat-container-grid .stat-container .stat-div h6 {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
