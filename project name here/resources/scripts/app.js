@@ -2,9 +2,20 @@ $(document).foundation()
 
 $(document).ready(function () {
 
+
+$('.trump-card-right').addClass("hide-button"); 
+$('.trump-card-left').addClass("hide-button"); 
+$('.side-a').addClass("hide-button"); 
+
     const coinFlip = () => {
         const flipResult = Math.random();
+        $('.trump-card-right').removeClass("hide-button");
+        $('.trump-card-left').removeClass("hide-button");
+        $('.side-a').removeClass("hide-button");
+        $('.new-card').addClass("hide-button");
         let activePlayer;
+        document.querySelector('.trump-card-right .card-count-right').textContent= 'Cards Remaining: ' + rightDeck.length;
+        document.querySelector('.trump-card-left .card-count-left').textContent= 'Cards Remaining: ' + leftDeck.length ;
         $('#coin').removeClass();
         $('.trump-card-left').removeClass('active-player','inactive-player');
         $('.trump-card-right').removeClass('active-player','inactive-player');
@@ -138,7 +149,7 @@ $(document).ready(function () {
             image: 'resources/images/salah.jpg',
             comedicPresence: 70,
             leadership: 65,
-            bigGameImpact: 87,
+            bigGameImpact: 90,
             weakFootAbility: 40,
             clubLoyalty: 80,
             sexAppeal: 67
@@ -248,33 +259,29 @@ coinFlip();
 
 document.querySelector('.new-card').addEventListener('click', newGame);
 
-// START GAME BUTTON
-
-// 1. COIN FLIPS, DECIDES OUR ACTIVE PLAYER
 
 
 
 
 
-//  2. ACTIVE PLAYER CAN SELECT ANY OF HIS PLAYERS STATS 
-// once a stat is clicked, a function runs that compares active player against inactive player and decides which one is higher (console.log the outcome)
+//the curser hover effect.
+$('.stat-div').hover(function(){
+    $(this).css("color", "white");
+    }, function(){
+    $(this).css("color", "");
+  });
 
 
 
 
 
-
-
-
-
-
-//just need to find a way to make the ('.cp-stat') interchangeable....the rest of the below code would run
 
 $('.stat-div').click(function(){
-    $('.trump-card-left').removeClass('active-player','inactive-player');
-    $('.trump-card-right').removeClass('active-player','inactive-player');
-    var statClass = $(this).find('h6').attr('class');
-console.log(statClass);
+
+
+    
+var statClass = $(this).find('h6').attr('class');
+
 
 const statContainerRight = document.querySelector('.trump-card-right .' + statClass);
 const statContainerLeft = document.querySelector('.trump-card-left .' + statClass);
@@ -284,6 +291,8 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
     const statRight =statContainerRight.textContent;
     console.log(statLeft, statRight);
 
+
+
     if (statLeft > statRight) {
         alert(leftDeck[0] + ' wins!');
         // remove the losing card (top card) from the right deck and add it to the left deck 
@@ -291,9 +300,16 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
         rightDeck = rightDeck.slice(1);
         leftDeck.push(leftDeck.shift());
         console.log(leftDeck, rightDeck);
-        activePlayer = leftDeck;
+        activePlayer = leftDeck; // this just shows which arrays turn it is
+        document.querySelector('.trump-card-right .card-count-right').textContent= 'Cards Remaining: ' + rightDeck.length;
+        document.querySelector('.trump-card-left .card-count-left').textContent= 'Cards Remaining: ' + leftDeck.length ; 
         $('.trump-card-left').addClass('active-player');
-            $('.trump-card-right').addClass('inactive-player');
+        $('.trump-card-left').removeClass('inactive-player');
+        $('.trump-card-right').addClass('inactive-player');
+        $('.trump-card-right').removeClass('active-player');
+        $('#coin').addClass('side-a');
+        $('#coin').removeClass('side-b');
+
 
     } else if (statRight > statLeft) {
         alert (rightDeck[0] + ' wins!');
@@ -302,15 +318,45 @@ const statContainerLeft = document.querySelector('.trump-card-left .' + statClas
         rightDeck.push(rightDeck.shift());
         console.log(leftDeck, rightDeck);
         activePlayer = rightDeck;
+        document.querySelector('.trump-card-right .card-count-right').textContent= 'Cards Remaining: ' + rightDeck.length;
+        document.querySelector('.trump-card-left .card-count-left').textContent= 'Cards Remaining: ' + leftDeck.length ;
         $('.trump-card-right').addClass('active-player');
-            $('.trump-card-left').addClass('inactive-player');
+        $('.trump-card-right').removeClass('inactive-player');
+        $('.trump-card-left').addClass('inactive-player');
+        $('.trump-card-left').removeClass('active-player');
+        $('#coin').addClass('side-b');
+        $('#coin').removeClass('side-a');
 
-    } else (alert('Ooooo draw'));
+    } else {
+        alert('Oooo draw');
+        rightDeck.push(rightDeck[0]);
+        rightDeck.shift(); 
+        leftDeck.push(leftDeck[0]);
+        leftDeck.shift();
+        console.log(leftDeck, rightDeck);
+    };
 
-console.log(rightDeck[0], leftDeck[0]);
 
-newCardRight();
-newCardLeft();
+const endGame = (player) => {
+    alert(`${player} wins the game!`);
+    $('.trump-card-right').addClass("hide-button"); 
+    $('.trump-card-left').addClass("hide-button"); 
+    $('.side-a').addClass("hide-button"); 
+    $('.new-card').addClass("hide-button");
+
+
+}    
+
+if (rightDeck.length === 0) {
+        endGame('Player 1')
+    } else if (leftDeck.length === 0) {
+        endGame('Player 2')
+    } else {
+        newCardRight();
+        newCardLeft();
+    };   
+
+
 
 
 

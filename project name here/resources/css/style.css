@@ -174,5 +174,15 @@ body {
 
 .trump-card .stat-container-grid .stat-container .stat-div h6 {
   display: none;
+
+}
+
+.stat-div {
+cursor: pointer;
+
+}
+
+.hide-button {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
